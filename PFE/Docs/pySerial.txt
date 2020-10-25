@@ -1,0 +1,44 @@
+
+***********************************************How to access UART using Python *****************************************
+
+
+1) Free the serial port
+
+Before going further, you must check that the console is not listening on the serial port. To do this, run
+
+          sudo raspi-config
+
+	  Select -> Interfacing Options
+
+          select Serial option to enable UART
+
+          Then it will ask for login shell to be accessible over Serial, select No shown as follows.
+
+          At the end, it will ask for enabling Hardware Serial port, select Yes.
+
+          Finally, our UART is enabled for Serial Communication on RX and TX pin of Raspberry Pi 3.
+
+
+2) reboot the Raspberry Pi.
+
+
+3)Install pyserial 
+
+Pyserial provides backend for serial communication using python. The module named ‘serial’ selects appropriate backend automatically. 
+To install pySerial, by using following command.
+
+
+          sudo pip3 install pyserial
+
+          sudo apt-get install python-serial python3-serial
+
+
+And in case you don't have working internet connection on Raspberry Pi
+
+1) download the PySerial package  
+
+           https://pypi.org/project/pyserial/
+
+2) cd pyserial-3.4 
+
+           sudo python setup.py install

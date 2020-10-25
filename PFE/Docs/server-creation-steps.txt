@@ -1,0 +1,73 @@
+
+**************************************Server creation Steps******************************
+
+mkdir Flask-Application  
+
+cd Flask-Application 
+
+sudo apt install python3-pip
+
+sudo apt install python3-venv 
+             
+sudo python3 -m venv env
+
+sudo chown -R pi:pi env
+
+. env/bin/activate
+
+pip install Flask
+ 
+pip install flask-httpauth
+
+pip install flask-restful
+
+pip install flask_restplus
+
+nano server.py
+
+export FLASK_APP=server.py
+
+export FLASK_ENV=development
+
+flask run --host=0.0.0.0 
+
+
+GET:
+     curl -u imen:python -i 192.168.8.100:5000/todo/api/v1.0/cards
+     
+     curl -u imen:python -i 192.168.8.100:5000/todo/api/v1.0/cards/1
+
+     curl -u imen:python -i 192.168.8.100:5000/todo/api/v1.0/terminals
+     
+     curl -u imen:python -i 192.168.8.100:5000/todo/api/v1.0/channels
+
+**curl -X GET "http://192.168.8.102:5000/Cards/" -H "accept: application/json" -H "X-API-KEY: mytoken"**
+
+UPDATE: 
+     
+      curl -u imen:python -i -H "Content-Type: application/json" -X PUT -d '{"Name":"aaaa"}' 192.168.8.100:5000/todo/api/v1.0/cards/2
+
+      curl -u imen:python -i -H "Content-Type: application/json" -X PUT -d '{"cardId":"1", "terminalId":"1"}' 192.168.8.100:5000/todo/api/v1.0/channels/2
+
+
+POST: 
+
+      curl -u imen:python -i -H "Content-Type: application/json" -X POST -d '{"Name":"smart"}' 192.168.8.100:5000/todo/api/v1.0/cards
+
+      curl -u imen:python -i -H "Content-Type: application/json" -X POST -d '{"Device_id":"3"}' 192.168.8.100:5000/todo/api/v1.0/terminals
+
+      curl -u imen:python -i -H "Content-Type: application/json" -X POST -d '{"cardId":"1","terminalId":"3"}' 192.168.8.100:5000/todo/api/v1.0/channels
+
+
+DELETE: 
+      
+      curl -u imen:python -i -H "Content-Type: application/json" -X DELETE  192.168.8.100:5000/todo/api/v1.0/cards/3
+    
+      curl -u imen:python -i -H "Content-Type: application/json" -X DELETE  192.168.8.100:5000/todo/api/v1.0/terminals/2
+    
+      curl -u imen:python -i -H "Content-Type: application/json" -X DELETE  192.168.8.100:5000/todo/api/v1.0/channels/2
+
+
+Sources: 
+
+https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask

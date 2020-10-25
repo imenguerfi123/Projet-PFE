@@ -1,0 +1,13 @@
+obj-m += module_hello.o
+
+module_hello-objs := start.o stop.o 
+
+#Create module object from start and stop objects
+ 
+
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules 
+
+clean:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean 
+

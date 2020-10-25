@@ -1,0 +1,8 @@
+COMPILER:=$(HOME)/rpi/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-
+SOURCE:=$(HOME)/rpi/linux-raspberrypi-kernel_1.20200212-1/
+PWD:=$(shell pwd)
+obj-m += helloRPI.o
+default:
+	make ARCH=arm CROSS_COMPILE=${COMPILER} -C $(SOURCE) M=$(PWD) modules
+clean:
+	make ARCH=arm CROSS_COMPILE=${COMPILER} -C $(SOURCE) M=$(PWD) clean

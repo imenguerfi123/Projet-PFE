@@ -1,0 +1,115 @@
+****************************************************Cross compilation of the raspberry pi****************************************************************************
+
+
+1. Create a directory for the demo.
+
+           mkdir rpi
+
+2. Get the specific build toolchain in this directory
+
+           git clone https://github.com/raspberrypi/tools
+
+3.Cloning / Downloading the Raspbian image from Raspberry PI Github repository
+
+     https://github.com/raspberrypi/linux/releases/tag/raspberrypi-kernel_1.20200212-1
+
+  By default the one coming right now is version 4.19.y. This doesn’t exactly match with the one we need i.e. 4.19.97-v7+.
+       
+4. Extract the tarball with the below command
+
+
+      tar -xvf linux-raspberrypi-kernel_1.20200212-1.tar.gz
+
+
+5. get into the the folder arm-rpi-4.9.3-linux-gnueabihf/bin
+  
+           cd /arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin
+
+           pwd
+
+==>(/home/imengurefi/rpi/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin) copy 
+
+           cd ~
+
+6. Adding the tool chain to your system PATH by entering the command line:
+
+          PATH=$PATH:/home/imengurefi/rpi/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin
+
+7. check if the tool chain has been added to your system PATH
+ 
+            echo $PATH
+
+==>(/usr/local/bin:/bin:/usr/bin:/home/imengurefi/rpi/tools/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin)
+
+8. build the sources and Device Tree files to Generate the .config File(default configuration):
+
+For Pi 2, Pi 3, Pi 3+, or Compute Module 3:
+
+	   cd rpi/linux-raspberrypi-kernel_1.20200212-1
+	   KERNEL=kernel7
+	   make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig
+
+If we want to change the default configuration
+
+           make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+
+
+For Raspberry Pi 4:
+
+  	  cd linux-raspberrypi-kernel_1.20200212-1
+	  KERNEL=kernel7l
+          make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2711_defconfig
+
+9. Then, for all: compile the raspbian kernel
+
+          make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- zImage modules dtbs
+
+
+**************************************************Cross Compilation of the helloRPI Kernel Module********************************************************************
+
+1. Create helloRPI.c
+
+2. Create Makefile to compile source
+
+3. Run the make command to compile the source code.
+	   
+           make(default)/make all
+	   make clean
+
+4. Send the created object file (helloRPI.ko)to your Raspberry via SSH using the command line 
+           
+            sudo scp helloRPI.ko pi@IPADDRESS:/home/pi
+
+5. Make the file executable from the RaspberryPi  by passing the command line 
+  
+            "chmod +x helloRPI.ko" 
+
+6. Loading/install the module
+	
+             sudo insmod hello.ko
+
+7. Get information about the module using the modinfo command
+	
+             modinfo hello.ko
+
+8. To see messages we can also use the dmesg command
+	
+             dmesg
+
+9. To see the loaded modules list we can use lsmod command
+	
+             lsmod 
+10. To unload the module, we run rmmod
+	
+            sudo rmmod hello
+
+
+
+Sources
+
+https://techfortalk.co.uk/category/linux-kernel-programming/
+
+https://linux.die.net/lkmpg/index.html
+
+
+

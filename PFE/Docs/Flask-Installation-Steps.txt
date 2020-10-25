@@ -1,0 +1,68 @@
+
+******************************Flask-Installation-Steps*********************************
+
+1) create a directory 
+
+            mkdir dir_name 
+
+2) Create an environment
+
+            sudo apt-get update
+
+            sudo apt install python3-pip
+            
+            sudo python3 -m pip install --upgrade pip setuptools wheel
+
+            sudo apt install python3-venv 
+             
+            sudo python3 -m venv env
+
+3) Change the permission of virtuel environment 
+
+            sudo chown -R pi:pi env
+
+4) check the permission of virtuel environment
+       
+            stat env
+
+5) Activate the environment
+
+             . env/bin/activate
+
+6) Install Flask
+             
+             pip install Flask
+
+7) Create a minimal Flask application
+           
+             nano Myapplication.py
+           
+8) Execute the application
+
+            export FLASK_APP=Myapplication.py
+
+To enable all development features (including debug mode) you can export 
+
+the FLASK_ENV environment variable and set it to development before running the server
+
+            export FLASK_ENV=development
+
+If we want change the default port number (5000)
+ 
+            export FLASK_RUN_PORT=8000
+
+If we have the debugger disabled or trust the users on our network, we can make 
+
+the server publicly available simply by adding --host=0.0.0.0 to the command line
+
+           flask run --host=0.0.0.0 
+
+9)deactivate the environment
+   
+           deactivate
+
+Sources :
+
+https://flask.palletsprojects.com/en/1.1.x/installation/
+
+https://flask.palletsprojects.com/en/1.1.x/quickstart/
